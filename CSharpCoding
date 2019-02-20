@@ -60,6 +60,8 @@ public class Program
 		Console.WriteLine("Single To Multi");
 		int [] singleNumArray = {1,2,3,4,5,6};
 		Program.SingleToMulti(singleNumArray, 2, 3);
+		
+		Program.FindAngleBetweenClockHands(9, 30);
 	}
 	
 	private static void ReverseString(string str) {
@@ -355,5 +357,18 @@ public class Program
 			}
 			Console.WriteLine();
 		}
+	}
+	
+	private static void FindAngleBetweenClockHands(int hours, int min) {
+		double hourAngle = (hours * 30) + (min * 30.0/60); // Angle per hour = 30 (360/12) 
+		double minAngle = min * 6; // Angle per min = 6 (360/60)
+		
+		double diff = Math.Abs(hourAngle - minAngle);
+
+		if(diff > 180) {
+			diff = 360 - diff;
+		}
+		
+		Console.WriteLine(diff);
 	}
 }

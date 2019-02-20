@@ -1,0 +1,359 @@
+using System;
+using System.Text;
+using System.Collections.Generic;
+using System.Linq;
+					
+public class Program
+{
+	public static void Main()
+	{
+		Program.ReverseString("sridhara");	
+		
+		Program.IsPalindrome("book");
+		
+		if(Program.IsPalindromeRecursive("book")) { 
+			Console.WriteLine("Palindrome");
+		} else {
+			Console.WriteLine("Not Palindrome");
+		}
+		
+		Program.ReverseStringOrder("This is a statement");
+		
+		Program.ReverseWordsOnly("Welcome to Csharp corner");
+		
+		Program.CountCharacters("hello world");
+		
+		Program.RemoveDuplicates("csharpcorner");
+		
+		Program.RemoveDuplicatesLinq("csharpcorner");
+		
+		Program.FindAllSubString("abcd");
+		
+		Program.findallsubstringNew("abcd");
+		
+		int [] numArray = new int[] {1,2,3,4,5};
+		Program.RotateLeft(numArray);
+		
+		int [] numArray1 = new int[] {1,2,3,4,5};
+		Program.RotateRight(numArray1);
+		
+		if(IsPrime(17)) {
+			Console.WriteLine("Is Prime");
+		} else {
+			Console.WriteLine("Is not Prime");
+		}
+		
+		Program.SumOfDigits(168);
+		
+		int [] numArray2 = {3,2,1,5,4};
+		Program.FindSecondLargest(numArray2);
+		
+		Program.FindThirdLargest(numArray2);
+
+		Console.WriteLine("Multi to Single Column Wise");
+		int [,] multiNumArray = {{1,2,3},{4,5,6}};
+		Program.MultiToSingleColumnwise(multiNumArray);
+		
+		Console.WriteLine("Multi to Single Row Wise");
+		Program.MultiToSingleRowWise(multiNumArray);
+		
+		Console.WriteLine("Single To Multi");
+		int [] singleNumArray = {1,2,3,4,5,6};
+		Program.SingleToMulti(singleNumArray, 2, 3);
+	}
+	
+	private static void ReverseString(string str) {
+		char[] charArray = str.ToCharArray();
+		Console.WriteLine(str);
+		Console.WriteLine(str.Length - 1);
+		
+		for(int i = 0, j = str.Length - 1; i < j; i++, j--) {
+			charArray[i] = str[j];
+			charArray[j] = str[i];
+		}
+		
+		Console.WriteLine("Reversed string - {0}", new string(charArray));
+	}
+	
+	private static void IsPalindrome(string str) {
+		bool flag = true;
+		
+		for(int  i = 0, j = str.Length -1; i < str.Length/2; i++, j--) {
+			if(str[i] != str[j]) {
+				flag = false;
+			}
+		}
+		
+		if (flag) {
+			Console.WriteLine("Palindrome");
+		} else {
+			Console.WriteLine("Not Palindrome");
+		}
+	}
+	
+	private static bool IsPalindromeRecursive(string str) {
+		if (str.Length <= 1) {
+			return true;
+		}
+		
+		if (str[0] != str[str.Length - 1]) {
+			return false;
+		} else { 
+			return IsPalindromeRecursive(str.Substring(1, str.Length-2));	
+		}
+	}
+	
+	private static void ReverseStringOrder(string str) {
+		int i;
+		StringBuilder reverse = new StringBuilder();
+		
+		int start = str.Length - 1;
+		int end = str.Length - 1;
+		
+		while (start > 0) {
+			if(str[start] == ' ') {
+				i = start + 1;
+				while(i <= end) {
+					reverse.Append(str[i]);
+					i++;
+				}
+				reverse.Append(' ');
+				end = start - 1;
+			}
+			
+			--start;
+		}
+		
+		// For Last word
+		for(i = 0; i <= end; i++) {
+			reverse.Append(str[i]);
+		}
+		
+		Console.WriteLine("ReverseStringOrder - " + reverse.ToString());
+		
+	}
+	
+	private static void ReverseWordsOnly(string str) {
+		
+		StringBuilder output = new StringBuilder();
+		List<char> charList = new List<char>();
+			
+		for(int i = 0; i < str.Length; i++) {
+			
+			if (str[i] == ' ' || i == str.Length -1) {
+				
+				if(i == str.Length - 1) {
+					charList.Add(str[i]);
+				}
+				
+				for(int k = charList.Count - 1; k >= 0; k--) {
+					output.Append(charList[k]);	
+				}
+				
+				output.Append(' ');
+				charList = new List<char>();
+								 
+			} else {
+				charList.Add(str[i]);
+			}		
+		}
+		
+		Console.WriteLine("ReverseWordsOnly - " + output.ToString());
+		
+	}
+	
+	private static void CountCharacters(string str) {
+		Dictionary<char, int> characterCount = new Dictionary<char, int>();
+		
+		foreach (var character in str) {
+			if (character != ' ') {
+				if(!characterCount.ContainsKey(character)) {
+					characterCount.Add(character, 1);
+				} else {
+					characterCount[character]++;
+				}	
+			}		   
+		}
+		
+		foreach(var character in characterCount) {
+			Console.WriteLine("{0} - {1}", character.Key, character.Value);
+		}	
+	}
+	
+	private static void RemoveDuplicates(string str) {
+		List<char> result = new List<char>();
+		string newString = string.Empty;
+		
+		for(int i = 0; i < str.Length; i++) {
+			if(!result.Contains(str[i])) {
+				result.Add(str[i]);
+				newString += str[i];
+			}
+		}
+		
+		Console.WriteLine(newString.ToString());
+	}
+	
+	private static void RemoveDuplicatesLinq(string str) {
+		Console.WriteLine(new string(str.Distinct().ToArray()));
+	}
+	
+	private static void FindAllSubString(string str) {
+		string result = string.Empty;
+		for(int i = 1; i <= str.Length; i++) {
+			for(int j = 0; j <= str.Length - i; j++) {
+				result += str.Substring(j, i);
+				result += " ";
+			}
+		}
+		
+		Console.WriteLine(result);
+	}
+	
+	private static void findallsubstringNew(string str)  
+ 	{  
+		string result = string.Empty;
+		for (int i = 0; i < str.Length; i++)  
+		{  
+			string output = string.Empty;
+			
+			for (int j = i; j < str.Length; j++)  
+			{
+				output += str[j];
+				result += output + " ";
+			}
+		}
+		
+		Console.WriteLine(result + " ");
+ 	}
+	
+	// Replace the last character on the right with each character to shift left one position.
+	private static void RotateLeft(int [] array) {
+		int size = array.Length;
+		int temp;
+		for(int i = size - 1; i > 0; i--) {
+			temp = array[size -1];
+			array[size - 1] = array[i -1];
+			array[i -1] = temp;
+		}
+		
+		Console.WriteLine(string.Join(",", array));
+	}
+	
+	private static void RotateRight(int [] array) {
+		int size = array.Length;
+		int temp;
+		for(int i = 0; i < size - 1 ; i++) {
+			temp = array[0];
+			array[0] = array[i+1];
+			array[i+1] = temp;
+		}
+		
+		Console.WriteLine(string.Join(",", array));
+	}
+	
+	// O(√n)
+	private static bool IsPrime(int number) {
+		if(number == 1) return false;
+		if(number == 2) return true;
+		if(number %2 == 0) return false;
+		
+		var squareRoot = (int)Math.Floor(Math.Sqrt(number));
+		
+		for(int i = 3; i < squareRoot; i += 2) {
+			if(number % i == 0) return false;
+		}
+		
+		return true;
+	}
+	
+	private static void SumOfDigits(int number) {
+		int sum = 0;
+		
+		while(number > 0) {
+			sum += number % 10; // Returns the last digit in a number.
+			number /= 10; // Removes a digit in a number.
+		}
+		
+		Console.WriteLine(sum);
+	}
+	
+	private static void FindSecondLargest(int [] array) {
+		int max1 = 0;
+		int max2 = 0;
+		
+		foreach (int i in array) {
+			if(i > max1) {
+				max2 = max1;
+				max1 = i;
+			} else if (i > max2) {
+				max2 = i;
+			}
+		}	
+		Console.WriteLine(max2);
+	}
+	
+	private static void FindThirdLargest(int [] array) {
+		int max1 = 0, max2 = 0, max3 = 0;
+		
+		foreach(int i in array) {
+			if(i > max1) {
+				max3 = max2;
+				max2 = max1;
+				max1 = i;
+			} else if (i > max2) {
+				max3 = max2;
+				max2 = i;
+			} else if (i > max3) {
+				max3 = i;
+			}
+		} 
+		Console.WriteLine(max3);
+	}
+	
+	private static void MultiToSingleColumnwise(int [,] array) {
+		int index = 0;
+		int width = array.GetLength(0);
+		int height = array.GetLength(1);
+		int [] single = new int[width * height];
+		
+		for(int y = 0; y < height; y++) {
+			for(int x = 0; x < width; x++) {
+				single[index] = array[x,y];
+				Console.Write(single[index]+" ");
+				index++;
+			}
+			Console.WriteLine();
+		}
+	}
+	
+	private static void MultiToSingleRowWise(int [,] array) {
+		int index = 0;
+		int width = array.GetLength(0);
+		int height = array.GetLength(1);
+		int [] single = new int[width * height];
+		
+		for(int x = 0; x < width; x++) {
+			for(int y =0; y < height; y++) {
+				single[index] = array[x,y];
+				Console.Write(single[index]+" ");
+				index++;
+			}
+			Console.WriteLine();
+		}
+	}
+	
+	private static void SingleToMulti(int [] array, int row, int col) {
+		int index = 0;
+		int [,] multi = new int[row, col];
+		
+		for(int x = 0; x < row; x++) {
+			for(int y =0; y < col; y++) {
+				multi[x,y] = array[index];
+				index++;
+				Console.Write(multi[x,y]+ " ");
+			}
+			Console.WriteLine();
+		}
+	}
+}

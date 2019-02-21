@@ -7,9 +7,9 @@ public class Program
 {
 	public static void Main()
 	{
-		Program.ReverseString("sridhara");	
+		ReverseString("sridhara");
 		
-		Program.IsPalindrome("book");
+		IsPalindrome("book");
 		
 		if(Program.IsPalindromeRecursive("book")) { 
 			Console.WriteLine("Palindrome");
@@ -17,25 +17,25 @@ public class Program
 			Console.WriteLine("Not Palindrome");
 		}
 		
-		Program.ReverseStringOrder("This is a statement");
+		ReverseStringOrder("This is a statement");
 		
-		Program.ReverseWordsOnly("Welcome to Csharp corner");
+		ReverseWordsOnly("Welcome to Csharp corner");
 		
-		Program.CountCharacters("hello world");
+		CountCharacters("hello world");
 		
-		Program.RemoveDuplicates("csharpcorner");
+		RemoveDuplicates("csharpcorner");
 		
-		Program.RemoveDuplicatesLinq("csharpcorner");
+		RemoveDuplicatesLinq("csharpcorner");
 		
-		Program.FindAllSubString("abcd");
+		FindAllSubString("abcd");
 		
-		Program.findallsubstringNew("abcd");
+		findallsubstringNew("abcd");
 		
 		int [] numArray = new int[] {1,2,3,4,5};
-		Program.RotateLeft(numArray);
+		RotateLeft(numArray);
 		
 		int [] numArray1 = new int[] {1,2,3,4,5};
-		Program.RotateRight(numArray1);
+		RotateRight(numArray1);
 		
 		if(IsPrime(17)) {
 			Console.WriteLine("Is Prime");
@@ -43,31 +43,29 @@ public class Program
 			Console.WriteLine("Is not Prime");
 		}
 		
-		Program.SumOfDigits(168);
+		SumOfDigits(168);
 		
 		int [] numArray2 = {3,2,1,5,4};
-		Program.FindSecondLargest(numArray2);
+		FindSecondLargest(numArray2);
 		
-		Program.FindThirdLargest(numArray2);
+		FindThirdLargest(numArray2);
 
-		Console.WriteLine("Multi to Single Column Wise");
+		Console.WriteLine("Multi to Single Column Wise,");
 		int [,] multiNumArray = {{1,2,3},{4,5,6}};
-		Program.MultiToSingleColumnwise(multiNumArray);
+		MultiToSingleColumnwise(multiNumArray);
 		
-		Console.WriteLine("Multi to Single Row Wise");
-		Program.MultiToSingleRowWise(multiNumArray);
+		Console.WriteLine("Multi to Single Row Wise,");
+		MultiToSingleRowWise(multiNumArray);
 		
-		Console.WriteLine("Single To Multi");
+		Console.WriteLine("Single To Multi,");
 		int [] singleNumArray = {1,2,3,4,5,6};
-		Program.SingleToMulti(singleNumArray, 2, 3);
+		SingleToMulti(singleNumArray, 2, 3);
 		
-		Program.FindAngleBetweenClockHands(9, 30);
+		FindAngleBetweenClockHands(9, 30);
 	}
 	
 	private static void ReverseString(string str) {
 		char[] charArray = str.ToCharArray();
-		Console.WriteLine(str);
-		Console.WriteLine(str.Length - 1);
 		
 		for(int i = 0, j = str.Length - 1; i < j; i++, j--) {
 			charArray[i] = str[j];
@@ -131,8 +129,7 @@ public class Program
 			reverse.Append(str[i]);
 		}
 		
-		Console.WriteLine("ReverseStringOrder - " + reverse.ToString());
-		
+		Console.WriteLine("ReverseStringOrder - " + reverse.ToString());	
 	}
 	
 	private static void ReverseWordsOnly(string str) {
@@ -177,6 +174,7 @@ public class Program
 			}		   
 		}
 		
+		Console.WriteLine("Count characters in a word - ");
 		foreach(var character in characterCount) {
 			Console.WriteLine("{0} - {1}", character.Key, character.Value);
 		}	
@@ -193,11 +191,11 @@ public class Program
 			}
 		}
 		
-		Console.WriteLine(newString.ToString());
+		Console.WriteLine("Remove Duplicates - {0}", newString.ToString());
 	}
 	
 	private static void RemoveDuplicatesLinq(string str) {
-		Console.WriteLine(new string(str.Distinct().ToArray()));
+		Console.WriteLine("Remove duplicates - {0}",new string(str.Distinct().ToArray()));
 	}
 	
 	private static void FindAllSubString(string str) {
@@ -209,12 +207,13 @@ public class Program
 			}
 		}
 		
-		Console.WriteLine(result);
+		Console.WriteLine("Find all sub string - {0}", result);
 	}
 	
 	private static void findallsubstringNew(string str)  
  	{  
 		string result = string.Empty;
+		Console.Write("Find all substring - ");
 		for (int i = 0; i < str.Length; i++)  
 		{  
 			string output = string.Empty;
@@ -239,7 +238,7 @@ public class Program
 			array[i -1] = temp;
 		}
 		
-		Console.WriteLine(string.Join(",", array));
+		Console.WriteLine("Rotate left - {0}",string.Join(",", array));
 	}
 	
 	private static void RotateRight(int [] array) {
@@ -251,7 +250,7 @@ public class Program
 			array[i+1] = temp;
 		}
 		
-		Console.WriteLine(string.Join(",", array));
+		Console.WriteLine("Rotate right - {0}",string.Join(",", array));
 	}
 	
 	// O(√n)
@@ -277,7 +276,7 @@ public class Program
 			number /= 10; // Removes a digit in a number.
 		}
 		
-		Console.WriteLine(sum);
+		Console.WriteLine("Sum of digits - {0}", sum);
 	}
 	
 	private static void FindSecondLargest(int [] array) {
@@ -292,7 +291,7 @@ public class Program
 				max2 = i;
 			}
 		}	
-		Console.WriteLine(max2);
+		Console.WriteLine("Find second largest - {0}", max2);
 	}
 	
 	private static void FindThirdLargest(int [] array) {
@@ -309,8 +308,9 @@ public class Program
 			} else if (i > max3) {
 				max3 = i;
 			}
-		} 
-		Console.WriteLine(max3);
+		}
+		
+		Console.WriteLine("Find second largest - {0}", max3);
 	}
 	
 	private static void MultiToSingleColumnwise(int [,] array) {
@@ -325,6 +325,7 @@ public class Program
 				Console.Write(single[index]+" ");
 				index++;
 			}
+			
 			Console.WriteLine();
 		}
 	}
@@ -369,6 +370,6 @@ public class Program
 			diff = 360 - diff;
 		}
 		
-		Console.WriteLine(diff);
+		Console.Write("Find angle between clocks hands - {0}", diff);
 	}
 }
